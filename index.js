@@ -1,5 +1,6 @@
 const Express = require('express');
 const { listAllContainers, getContainerDetails, startContainer, stopContainer } = require('./services/containerService');
+const { checkHealth } = require('./services/healthService');
 
 const app = Express();
 
@@ -44,6 +45,17 @@ app.post('/containers/:id/stop', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Failed to stop container' });
   }
+});
+
+app.get('/health/:service', async (req, res) => {
+  const serviceName = req.params.service;
+    try {
+      const healthStatus = await checkHealth(serviceName);
+      res.json(healthStatus);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to retrieve health status' });
+    }
 });
 
 app.listen(5000, () => {
