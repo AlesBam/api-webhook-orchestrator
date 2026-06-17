@@ -1,5 +1,5 @@
 const Express = require('express');
-const { listAllContainers, getContainerDetails } = require('./services/containerService');
+const { listAllContainers, getContainerDetails, startContainer, stopContainer } = require('./services/containerService');
 
 const app = Express();
 
@@ -21,6 +21,28 @@ app.get('/containers/:id', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to retrieve container details' });
+  }
+});
+
+app.post('/containers/:id/start', async (req, res) => {
+  const containerId = req.params.id;
+  try {
+    const result = await startContainer(containerId);
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to start container' });
+  }
+});
+
+app.post('/containers/:id/stop', async (req, res) => {
+  const containerId = req.params.id;
+  try {
+    const result = await stopContainer(containerId);
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to stop container' });
   }
 });
 

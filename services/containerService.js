@@ -19,4 +19,16 @@ const getContainerDetails = async (containerId) => {
   };
 };
 
-module.exports = { listAllContainers, getContainerDetails };
+const startContainer = async (containerId) => {
+    const container = docker.getContainer(containerId);
+    await container.start();
+    return { message: `Container ${containerId} started successfully` };
+};
+
+const stopContainer = async (containerId) => {
+    const container = docker.getContainer(containerId);
+    await container.stop();
+    return { message: `Container ${containerId} stopped successfully` };
+};
+
+module.exports = { listAllContainers, getContainerDetails, startContainer, stopContainer };
