@@ -1,0 +1,24 @@
+{
+  "name": "api-webhook-orchestrator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlesBam/api-webhook-orchestrator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlesBam/api-webhook-orchestrator/issues"
+  },
+  "homepage": "https://github.com/AlesBam/api-webhook-orchestrator#readme",
+  "description": "",
+  "dependencies": {
+    "dockerode": "^5.0.0",
+    "express": "^5.2.1"
+  }
+}
