@@ -9,9 +9,11 @@ app.get('/containers', async (req, res) => {
     const containers = await listAllContainers();
     res.json(containers);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to retrieve containers' });
-  }
+        const statusCode = error.statusCode || 500;
+        const message = error.message || 'Failed to retrieve container details';
+        console.error(error);
+        res.status(statusCode).json({ error: message })
+    }
 });
 
 app.get('/containers/:id', async (req, res) => {
@@ -20,10 +22,12 @@ app.get('/containers/:id', async (req, res) => {
     const container = await getContainerDetails(containerId);
     res.json(container);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to retrieve container details' });
-  }
-});
+        const statusCode = error.statusCode || 500;
+        const message = error.message || 'Failed to retrieve container details';
+        console.error(error);
+        res.status(statusCode).json({ error: message })
+    }
+}); 
 
 app.post('/containers/:id/start', async (req, res) => {
   const containerId = req.params.id;
@@ -31,9 +35,11 @@ app.post('/containers/:id/start', async (req, res) => {
     const result = await startContainer(containerId);
     res.json(result);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to start container' });
-  }
+        const statusCode = error.statusCode || 500;
+        const message = error.message || 'Failed to retrieve container details';
+        console.error(error);
+        res.status(statusCode).json({ error: message })
+    }
 });
 
 app.post('/containers/:id/stop', async (req, res) => {
@@ -42,9 +48,11 @@ app.post('/containers/:id/stop', async (req, res) => {
     const result = await stopContainer(containerId);
     res.json(result);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to stop container' });
-  }
+        const statusCode = error.statusCode || 500;
+        const message = error.message || 'Failed to retrieve container details';
+        console.error(error);
+        res.status(statusCode).json({ error: message })
+    }
 });
 
 app.get('/health/:service', async (req, res) => {
@@ -53,8 +61,10 @@ app.get('/health/:service', async (req, res) => {
       const healthStatus = await checkHealth(serviceName);
       res.json(healthStatus);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Failed to retrieve health status' });
+        const statusCode = error.statusCode || 500;
+        const message = error.message || 'Failed to retrieve container details';
+        console.error(error);
+        res.status(statusCode).json({ error: message })
     }
 });
 

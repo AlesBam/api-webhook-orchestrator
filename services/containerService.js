@@ -20,15 +20,32 @@ const getContainerDetails = async (containerId) => {
 };
 
 const startContainer = async (containerId) => {
-    const container = docker.getContainer(containerId);
-    await container.start();
-    return { message: `Container ${containerId} started successfully` };
+    try {
+        const container = docker.getContainer(containerId);
+        await container.start();
+        return { message: `Container ${containerId} started successfully` };
+    } catch (error) {
+        if (error.statusCode === 304) {
+            return { message: `Container ${containerId} is already running` };
+        } 
+        else {
+            throw error; 
+    }}
+        
 };
 
 const stopContainer = async (containerId) => {
-    const container = docker.getContainer(containerId);
-    await container.stop();
-    return { message: `Container ${containerId} stopped successfully` };
+    try {
+        const container = docker.getContainer(containerId);
+        await container.stop();
+        return { message: `Container ${containerId} stopped successfully` };
+    } catch (error) {
+        if (error.statusCode === 304) {
+            return { message: `Container ${containerId} is already stopped` };
+        } 
+        else {
+            throw error;
+    }}
 };
 
 module.exports = { listAllContainers, getContainerDetails, startContainer, stopContainer };
