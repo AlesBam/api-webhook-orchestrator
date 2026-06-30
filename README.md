@@ -1,6 +1,6 @@
 # API Webhook Orchestrator
 
-A lightweight Node.js orchestration service that manages two other backend projects — [api-integration-gateway](https://github.com/your-username/api-integration-gateway) and [webhook-ingestion-service](https://github.com/your-username/webhook-ingestion-service) — by controlling their Docker containers and monitoring their application-level health.
+A lightweight Node.js orchestration service that manages two other backend projects — [api-integration-gateway](https://github.com/AlesBam/api-integration-gateway) and [webhook-ingestion-service](https://github.com/AlesBam/webhook-ingestion-service) — by controlling their Docker containers and monitoring their application-level health.
 
 This project was built to demonstrate infrastructure-focused backend engineering: managing services from the outside, with no direct imports or shared dependencies between projects, purely through the Docker Engine API and HTTP.
 
